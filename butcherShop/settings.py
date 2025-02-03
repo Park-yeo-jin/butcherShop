@@ -130,7 +130,7 @@ INTERNAL_IPS = [
 
 AUTH_USER_MODEL = 'user.User'
 
-STATIC_ROOT = '/static/'
+STATIC_ROOT = 'static/'
 # STATIC_URL = "static"
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
