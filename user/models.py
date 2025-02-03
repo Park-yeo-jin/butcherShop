@@ -5,16 +5,16 @@ class UserManager(BaseUserManager):
     use_in_migrations = True    
 
     """ 커스텀 User Manager """
-    def create_user(self, username, email, password=None, **extra_fields):
-        if not email:
-            raise ValueError("이메일은 필수입니다.")
-        email = self.normalize_email(email)
-        user = self.model(username=username, email=email, **extra_fields)
+    def create_user(self, username, password=None, **extra_fields):
+        # if not email:
+        #     raise ValueError("이메일은 필수입니다.")
+        # email = self.normalize_email(email)
+        user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self._db)
         return user
 
-    def create_superuser(self, username, email, password=None, **extra_fields):
+    def create_superuser(self, username, password=None, **extra_fields):
         extra_fields.setdefault("is_staff", True)
         extra_fields.setdefault("is_superuser", True)
 
@@ -23,7 +23,7 @@ class UserManager(BaseUserManager):
         if extra_fields.get("is_superuser") is not True:
             raise ValueError("슈퍼유저는 is_superuser=True 이어야 합니다.")
 
-        return self.create_user(username, email, password, **extra_fields)
+        return self.create_user(username, password, **extra_fields)
     
 
 class User(AbstractBaseUser, PermissionsMixin):
