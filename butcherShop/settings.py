@@ -131,7 +131,7 @@ INTERNAL_IPS = [
 
 AUTH_USER_MODEL = 'user.User'
 
-STATIC_ROOT = 'static/'
+# STATIC_ROOT = 'static/'
 STATIC_URL = "static/"
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
