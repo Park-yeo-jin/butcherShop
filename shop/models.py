@@ -20,9 +20,9 @@ class Product(models.Model):
     stock = models.IntegerField()
     price = models.DecimalField(max_digits = 10, decimal_places = 2)
     # 대분류
-    Lcategory = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'Lcategory')
+    Lcategory = models.ForeignKey(Category, on_delete = models.CASCADE, related_name='products_L')
     # 소분류
-    Scategory = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'Scategory')
+    Scategory = models.ForeignKey(Category, on_delete = models.CASCADE, related_name = 'products_S')
     image = models.ImageField(upload_to = 'products/')
 
     def __str__(self):
