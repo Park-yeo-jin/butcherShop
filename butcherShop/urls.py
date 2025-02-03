@@ -8,6 +8,8 @@ from rest_framework import permissions
 from django.shortcuts import redirect
 from drf_yasg.utils import swagger_auto_schema
 from rest_framework.decorators import api_view
+from django.conf.urls.static import static
+
 
 schema_view = get_schema_view(
     openapi.Info(
@@ -38,6 +40,9 @@ urlpatterns = [
     path('api/token/', TokenObtainPairView.as_view(), name='token_obtain_pair'),
     path('api/token/refresh/', TokenRefreshView.as_view(), name='token_refresh'),
 ]
+urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
+# urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
 
 if settings.DEBUG :
     urlpatterns += [
