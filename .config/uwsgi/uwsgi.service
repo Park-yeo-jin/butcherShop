@@ -3,13 +3,17 @@ Description=uWSGI service
 After=syslog.target
 
 [Service]
-ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/butcherShop/.config/uwsgi/mysite.ini
+ExecStart=/home/ubuntu/myvenv/bin/uwsgi -i /srv/butcherShop/.config/uwsgi/butcher.ini
 
 Restart=always
 KillSignal=SIGQUIT
 Type=notify
 StandardError=syslog
 NotifyAccess=all
+User=ubuntu
+Group=ubuntu
+WorkingDirectory=/srv/butcherShop
+Environment="PATH=/home/ubuntu/myvenv/bin"
 
 [Install]
 WantedBy=multi-user.target
