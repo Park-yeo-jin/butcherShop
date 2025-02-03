@@ -77,9 +77,9 @@ class ProductViewSet(viewsets.ModelViewSet):
     filterset_fields = ['Lcategory', 'Scategory']
     permission_classes = [AllowAny]
     search_fields = ['name']
-    ordering = ['id']
+    ordering_fields = ['id', 'name']
 
-    @action(detail=False, methods=['get'])
+    # @action(detail=False, methods=['get'])
 
     def get_queryset(self):
         queryset = super().get_queryset()
@@ -93,35 +93,35 @@ class ProductViewSet(viewsets.ModelViewSet):
             filters['Lcategory__name__contains'] = Lcategory_Id
         if Scategory_Id:
             filters['Scategory__name__contains'] = Scategory_Id
-        # if search:
-        #     filters['name__contains'] = search
+        if search:
+            filters['name__contains'] = search
         
         return queryset.filter(**filters)
     
-    @swagger_auto_schema(
-        operation_description="상품 목록 조회",
-        manual_parameters=[
-            openapi.Parameter(
-                name="Lcategory",
-                in_=openapi.IN_QUERY,
-                type=openapi.TYPE_STRING,
-                required=False,
-            ),
-            openapi.Parameter(
-                name="Scategory",
-                in_=openapi.IN_QUERY,
-                type=openapi.TYPE_STRING,
-                required=False,
-            ),
-            # openapi.Parameter(
-            #     name="search",
-            #     in_=openapi.IN_QUERY,
-            #     type=openapi.TYPE_STRING,
-            #     required=False,
-            # )
-        ],
-        tags=["상품"]
-    )
+    # @swagger_auto_schema(
+    #     operation_description="상품 목록 조회",
+    #     manual_parameters=[
+    #         openapi.Parameter(
+    #             name="Lcategory",
+    #             in_=openapi.IN_QUERY,
+    #             type=openapi.TYPE_STRING,
+    #             required=False,
+    #         ),
+    #         openapi.Parameter(
+    #             name="Scategory",
+    #             in_=openapi.IN_QUERY,
+    #             type=openapi.TYPE_STRING,
+    #             required=False,
+    #         ),
+    #         # openapi.Parameter(
+    #         #     name="search",
+    #         #     in_=openapi.IN_QUERY,
+    #         #     type=openapi.TYPE_STRING,
+    #         #     required=False,
+    #         # )
+    #     ],
+    #     tags=["상품"]
+    # )
     
     def list(self, request, *args, **kwargs):
         queryset = self.get_queryset()
